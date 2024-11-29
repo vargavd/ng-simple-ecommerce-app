@@ -1,0 +1,23 @@
+<p-toolbar>
+  <div class="p-toolbar-group-start">
+    <a
+      routerLink="/products"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      icon="pi pi-home"
+    >
+      Products
+    </a>
+  </div>
+
+  <div class="p-toolbar-group-end">
+    <p-button
+      label="Cart"
+      routerLink="/cart"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      icon="pi pi-shopping-cart"
+      badge="8"
+    />
+  </div>
+</p-toolbar>
