@@ -1,7 +1,12 @@
 // NG IMPORTS
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+
+// CUSTOM IMPORTS
 import { HeaderComponent } from './header/header.component';
+
+// SERVICE IMPORTS
+import { ProductsService } from './services/products.service';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +19,11 @@ import { HeaderComponent } from './header/header.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
-  title = 'ng-simple-ecommerce-app';
+export class AppComponent implements OnInit {
+  constructor(private productsService: ProductsService) { }
+
+  // LIFECYCLES
+  ngOnInit(): void {
+    this.productsService.downloadProducts();
+  }
 }

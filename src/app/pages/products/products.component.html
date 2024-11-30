@@ -1,1 +1,17 @@
 <h1>Products</h1>
+
+@if (!products && (!errors ||  errors.length === 0)) { 
+  <p-progressSpinner 
+    styleClass="w-4rem h-4rem" 
+    strokeWidth="3" 
+    animationDuration="2s" 
+  />
+}
+
+@if (errors) {
+  <p-messages 
+    [value]="getErrorMessages()" 
+    [enableService]="false" 
+    [closable]="false"
+  />
+}
