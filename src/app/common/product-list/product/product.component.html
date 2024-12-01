@@ -1,0 +1,58 @@
+<!-- <div class="p-card p-3 shadow-2 surface-0 border-round w-full md:w-25rem">
+  <img 
+      src="https://via.placeholder.com/300" 
+      alt="Product Image" 
+      class="w-full border-round mb-3"
+  />
+  <h2 class="text-xl font-bold mb-2">Product Name</h2>
+  <p class="text-700 text-sm mb-3">Min Order: <span class="text-bold">10</span></p>
+  <p class="text-700 text-sm mb-3">Price: <span class="text-bold">$50.00</span></p>
+  <button class="p-button p-component p-button-primary w-full">Buy Now</button>
+</div> -->
+
+
+<div class="p-2 border-round-xl surface-0">
+  <div class="content p-2 text-900">
+    <div class="content-image bg-cover bg-no-repeat bg-center relative" style="height: 247px; background-image: url(https://via.placeholder.com/300);"></div>
+    <div class="content-info pt-1">
+      <div class="flex align-items-center justify-content-between py-2">
+        <h2 class="text-lg m-0 text-primary">Prime Coffee Shop</h2>
+
+        <div class="flex align-items-center gap-1 justify-content-center gap-1 pl-2">
+          <!-- <i class="pi pi-check-circle text-green-600"></i> -->
+          <i class="pi pi-times-circle text-red-600 text-xs"></i>
+          <span class="text-xs text-white white-space-nowrap">Out of Stock</span>
+        </div>
+      </div>
+      <div class="flex align-items-center gap-1">
+        <div class="text-xs">Min Order:</div>
+        <span class="text-xs white-space-nowrap font-bold">500</span>
+      </div>
+      
+      <div class="flex align-items-center justify-content-between mt-3">
+        <div class="flex align-items-center">
+          <p-button 
+            [link]="true"
+            icon="pi pi-minus"
+            aria-label="Decrease"
+            class="p-0"
+          />
+          <span class="px-3">1</span>
+          <p-button 
+            [link]="true"
+            icon="pi pi-plus"
+            aria-label="Increase"
+          />
+        </div>
+
+        <p-button 
+          [outlined]="true" 
+          class="text-sm" 
+          icon="pi pi-cart-plus"
+          label="Add" 
+        />
+      </div>
+
+    </div>
+  </div>
+</div>

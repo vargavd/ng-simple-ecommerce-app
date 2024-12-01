@@ -12,11 +12,16 @@ import { Product } from '../../models/product';
 import { ProductsService } from '../../services/products.service';
 import { Message } from 'primeng/api';
 
+// COMPONENT IMPORTS
+import { ProductListComponent } from '../../common/product-list/product-list.component';
+
 
 @Component({
   selector: 'app-products',
   standalone: true,
   imports: [
+    ProductListComponent,
+
     PrimeNG_ProgressSpinnerModule,
     PrimeNG_MessagesModule
   ],
