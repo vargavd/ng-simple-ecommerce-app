@@ -1,13 +1,15 @@
+// NG IMPORTS
 import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { AppComponent } from './app.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
-import { importProvidersFrom } from '@angular/core';
 import { By } from '@angular/platform-browser';
+
+// COMPONENT IMPORTS
+import { AppComponent } from './app.component';
+
+// SERVICE IMPORTS
 import { ProductsService } from './services/products.service';
-import { of } from 'rxjs';
+
 
 describe('AppComponent', () => {
   let productsServiceSpy: jasmine.SpyObj<ProductsService>;

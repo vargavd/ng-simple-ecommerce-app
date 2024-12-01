@@ -1,11 +1,18 @@
+// NG IMPORTS
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ProductsComponent } from './products.component';
-import { ProductsService } from '../../services/products.service';
 import { BehaviorSubject } from 'rxjs';
-import { Product } from '../../models/product';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser';
+
+// COMPONENT IMPORTS
+import { ProductsComponent } from './products.component';
+
+// SERVICE IMPORTS
+import { ProductsService } from '../../services/products.service';
+
+// MODEL IMPORTS
+import { Product } from '../../models/product';
+
 
 describe('ProductsComponent', () => {
   let productsComponent: ProductsComponent;

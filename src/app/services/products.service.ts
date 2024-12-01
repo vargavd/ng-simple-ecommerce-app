@@ -1,8 +1,11 @@
+// NG IMPORTS
 import { Injectable } from '@angular/core';
-
-import { Product } from '../models/product';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+
+// MODEL IMPORTS
+import { Product } from '../models/product';
+
 
 @Injectable({
   providedIn: 'root'
