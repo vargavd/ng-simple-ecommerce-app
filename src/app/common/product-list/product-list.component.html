@@ -1,15 +1,9 @@
 <div class="grid">
-  <div class="col-3 p-3"><app-product></app-product></div>
-  <div class="col-3 p-3"><app-product></app-product></div>
-  <div class="col-3 p-3"><app-product></app-product></div>
-  <div class="col-3 p-3"><app-product></app-product></div>
-  <div class="col-3 p-3"><app-product></app-product></div>
-  <div class="col-3 p-3"><app-product></app-product></div>
-  <div class="col-3 p-3"><app-product></app-product></div>
-  <div class="col-3 p-3"><app-product></app-product></div>
-  <div class="col-3 p-3"><app-product></app-product></div>
-  <div class="col-3 p-3"><app-product></app-product></div>
-  <div class="col-3 p-3"><app-product></app-product></div>
-  <div class="col-3 p-3"><app-product></app-product></div>
-  <div class="col-3 p-3"><app-product></app-product></div>
+  @if (products) {
+    @for (product of products; track product) {
+      <div class="col-3 p-3">
+        <app-product [product]="product"></app-product>
+      </div>
+    }
+  }
 </div>

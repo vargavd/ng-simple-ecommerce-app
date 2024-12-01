@@ -1,8 +1,11 @@
 // NG IMPORTS
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 // PRIMENG IMPORTS
 import { ButtonModule as PrimeNG_ButtonModule } from 'primeng/button';
+
+// MODEL IMPORTS
+import { Product } from '../../../models/product';
 
 
 @Component({
@@ -15,5 +18,5 @@ import { ButtonModule as PrimeNG_ButtonModule } from 'primeng/button';
   styleUrl: './product.component.scss'
 })
 export class ProductComponent {
-
+  @Input() product!: Product;
 }
