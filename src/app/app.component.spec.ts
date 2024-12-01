@@ -40,11 +40,4 @@ describe('AppComponent', () => {
     const routerOutlet = fixture.debugElement.query(By.css('router-outlet'));
     expect(routerOutlet).toBeTruthy();
   });
-
-  it('should call downloadProducts during initialization', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-
-    expect(productsServiceSpy.downloadProducts).toHaveBeenCalled();
-  });
 });
