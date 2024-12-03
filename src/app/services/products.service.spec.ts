@@ -75,4 +75,16 @@ describe('ProductsService', () => {
     expect(productsService.products.value?.find((product) => product.id === '1')?.amountInCart).toEqual(1);
     expect(productsService.products.value?.find((product) => product.id === '1')?.availableAmount).toEqual(9);
   });
+
+  it('should remove a product from the cart and update the available amount', () => {
+    productsService.products.next([
+      new Product('1', 'Product 1', '', 6, 1, 0, 4),
+      new Product('2', 'Product 2', '', 5, 2, 0)
+    ]);
+
+    productsService.removeFromCart('1');
+
+    expect(productsService.products.value?.find((product) => product.id === '1')?.amountInCart).toEqual(0);
+    expect(productsService.products.value?.find((product) => product.id === '1')?.availableAmount).toEqual(10);
+  });
 });

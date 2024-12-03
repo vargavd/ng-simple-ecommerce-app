@@ -1,1 +1,64 @@
+<div class="total text-4xl font-semibold text-900 relative" style="bottom: -26px; float: right;">
+  {{ '$' + getFullPriceInCart() }}
+</div>
+
 <h1>Cart</h1>
+
+@if (productsInCart && productsInCart.length > 0) {
+  <p-dataView #dv [value]="productsInCart">
+    <ng-template pTemplate="list">
+      <div class="grid grid-nogutter">
+          @for (product of productsInCart; track product) {
+            <div class="col-12 product-row">
+              <div [class]="getItemWrapperClassAttr($last)">
+                <div class="md:w-10rem relative">
+                  <img class="block xl:block mx-auto border-round w-full" [src]="product.img" [alt]="product.name" />
+                    @if (isItInStock(product)) {
+                      <p-tag value="In Stock" severity="success" class="absolute" [style.left.px]="4" [style.top.px]="4" />
+                    }
+                    @else {
+                      <p-tag value="Out of Stock" severity="danger" class="absolute" [style.left.px]="4" [style.top.px]="4" />
+                    }
+                </div>
+                <div class="flex flex-column md:flex-row justify-content-between md:align-items-center flex-1 gap-4">
+                  <div class="flex flex-row md:flex-column justify-content-between align-items-start gap-2">
+                    <div>
+                      <div class="text-lg font-medium text-900 mt-2 product-name">{{ product.name }}</div>
+                    </div>
+                    <div class="flex align-items-center gap-1" style="border-radius: 5px">
+                      <div class="surface-0 py-1 px-2 text-900 font-bold text-lg amount-in-cart" style="border-radius: 30px; box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.04), 0px 1px 2px 0px rgba(0, 0, 0, 0.06)">
+                        {{ product.amountInCart }}
+                      </div>
+                      In Cart
+                    </div>
+                  </div>
+                  <div class="flex flex-column md:align-items-end gap-5">
+                    <span class="text-xl font-semibold text-900 price">
+                      {{ '$' + roundTo2Decimals(product.price * product.amountInCart!) }}
+                    </span>
+                    <div class="flex flex-row-reverse md:flex-row gap-2">
+                      <p-button 
+                        icon="pi pi-cart-minus" 
+                        class="remove-from-cart flex-auto md:flex-initial white-space-nowrap" 
+                        label="Remove From Cart" 
+                        [outlined]="true"
+                        severity="danger"
+                        (click)="removeProductFromCart(product.id)"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          }
+      </div>
+    </ng-template>
+  </p-dataView>
+}
+@else {
+  <p-messages 
+    [value]="[{ severity: 'info', detail: 'No Products in Cart' }]" 
+    [enableService]="false" 
+    [closable]="false"
+  />
+}

@@ -1,6 +1,6 @@
 // NG IMPORTS
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, map } from 'rxjs';
+import { BehaviorSubject, take } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 // MODEL IMPORTS
@@ -19,15 +19,21 @@ export class ProductsService {
   errors = new BehaviorSubject<string[] | null>(null);
 
   constructor(private http: HttpClient) {
-    this.http.get<Product[]>(environment.apiUrl).subscribe({
-      next: (products) => {
-        this.products.next(products);
-      },
-      error: (error) => {
-        console.error(error);
-        this.errors.next(['Failed to download products:', error.message]);
-      }
-    });
+    this.http.get<Product[]>(environment.apiUrl)
+      .pipe(take(1))
+      .subscribe({
+        next: (products) => {
+          this.products.next(products.map((product) => {
+            product.amountInCart = 0;
+
+            return product;
+          }));
+        },
+        error: (error) => {
+          console.error(error);
+          this.errors.next(['Failed to download products:', error.message]);
+        }
+      });
   }
 
   addToCart(productId: string, amount: number): void {
@@ -51,6 +57,27 @@ export class ProductsService {
 
     product.availableAmount -= amount;
     product.amountInCart = product.amountInCart ? (product.amountInCart + amount) : amount;
+
+    this.products.next(this.products.value);
+  }
+
+  removeFromCart(productId: string): void {
+    if (this.products.value === null) {
+      return;
+    }
+
+    const product = this.products.value.find((product) => product.id === productId);
+
+    if (!product) {
+      throw new Error('Product not found.');
+    }
+
+    if (!product.amountInCart) {
+      throw new Error('Cannot remove product that is not in cart.');
+    }
+
+    product.availableAmount += product.amountInCart;
+    product.amountInCart = 0;
 
     this.products.next(this.products.value);
   }
