@@ -1,6 +1,7 @@
 // NG IMPORTS
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { BehaviorSubject } from 'rxjs';
 
 // COMPONENTS IMPORTS
 import { ProductListComponent } from './product-list.component';
@@ -9,6 +10,9 @@ import { ProductListComponent } from './product-list.component';
 import { Product } from '../../models/product';
 import { SampleProducts } from '../../models/product-sample-data';
 
+// SERVICE IMPORTS
+import { ProductsService } from '../../services/products.service';
+
 
 describe('ProductListComponent', () => {
   let component: ProductListComponent;
@@ -16,7 +20,16 @@ describe('ProductListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProductListComponent]
+      imports: [ProductListComponent],
+      providers: [
+        {
+          provide: ProductsService,
+          useValue: {
+            products: new BehaviorSubject<Product[] | null>(null),
+            errors: new BehaviorSubject<string[] | null>(null),
+          }
+        }
+      ]
     })
       .compileComponents();
 
@@ -32,14 +45,14 @@ describe('ProductListComponent', () => {
     expect(component.products).toBeNull();
   });
 
-  it('should display 0 products when the products array is empty', () => {
+  it('should display 0 products when products is null', () => {
     const productCards = fixture.debugElement.queryAll(By.css('app-product'));
     expect(productCards.length).toBe(0);
   });
 
   it('should display 3 products when the products array has 3 item', () => {
     component.products = SampleProducts.slice(0, 3);
-    fixture.detectChanges();
+    fixture.detectChanges();;
 
     const productCards = fixture.debugElement.queryAll(By.css('app-product'));
     expect(productCards.length).toBe(3);

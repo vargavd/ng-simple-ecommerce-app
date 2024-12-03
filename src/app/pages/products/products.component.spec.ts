@@ -88,7 +88,7 @@ describe('ProductsComponent', () => {
     expect(errorMessages[1].nativeElement.textContent).toContain('401 Unauthorized');
   });
 
-  // this test is redundant because it's already covered in the product-list component, but I thought it would be a good idea to include it here as wel
+  // this test is already covered in the product-list component, but I thought it would be a good idea to include it here as wel
   it('should display 3 products when productsService emits 3 new products', () => {
     const products: Product[] = SampleProducts.slice(0, 3);
 

@@ -6,6 +6,6 @@ export class Product {
     public availableAmount: number,
     public minOrderAmount: number,
     public price: number,
-    public amountInCart: number = 0
+    public amountInCart?: number
   ) { }
 }

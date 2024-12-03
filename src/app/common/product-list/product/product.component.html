@@ -19,20 +19,26 @@
         </h2>
 
         <div class="flex align-items-center gap-1 justify-content-center pl-2">
-          @if (product.availableAmount > 0) {
+          @if (isThereEnoughAmount) {
             <i class="pi pi-check-circle text-green-600"></i>
-            <span class="text-xs text-white white-space-nowrap">In Stock</span>
+            <span class="text-xs text-white white-space-nowrap in-stock">({{ product.availableAmount }}) In Stock</span>
           }
           @else {
             <i class="pi pi-times-circle text-red-600"></i>
-            <span class="text-xs text-white white-space-nowrap">Out of Stock</span>
+            @if (product.availableAmount) {
+              <span class="text-xs text-white white-space-nowrap not-enough">({{ product.availableAmount }}) Not Enough</span>
+            } 
+            @else {
+              <span class="text-xs text-white white-space-nowrap out-of-stock">Out of Stock</span>
+            }
           }
         </div>
       </div>
+
       @if (product.minOrderAmount > 1) {
         <div class="flex align-items-center gap-1">
           <div class="text-xs">Min Order:</div>
-          <span class="text-xs white-space-nowrap font-bold">
+          <span class="text-xs white-space-nowrap font-bold min-order-amount">
             {{ product.minOrderAmount }}
           </span>
         </div>
@@ -40,7 +46,7 @@
 
       <div class="flex align-items-center gap-1 justify-content-start mt-2">
         <div class="text-xs">$</div>
-        <span class="font-bold">
+        <span class="font-bold price-amount">
           {{ product.price }}
         </span>
       </div>
@@ -52,20 +58,27 @@
             icon="pi pi-minus"
             aria-label="Decrease"
             class="p-0"
+            (click)="decreaseAddToCartNumber()"
+            class="decrease-button"
           />
-          <span class="px-3">1</span>
+          <span class="px-3 add-to-cart-amount">{{ addToCartNumber }}</span>
           <p-button 
             [link]="true"
             icon="pi pi-plus"
             aria-label="Increase"
+            (click)="increaseAddToCartNumber()"
+            class="increase-button"
           />
         </div>
 
         <p-button 
           [outlined]="true" 
-          class="text-sm" 
+          class="text-sm add-to-cart-button" 
           icon="pi pi-cart-plus"
           label="Add" 
+          (click)="addToCart()"
+          [severity]="canAddToCart ? 'primary' : 'secondary'"
+          [disabled]="!canAddToCart"
         />
       </div>
 

@@ -35,7 +35,7 @@ export class ProductsService {
       return;
     }
 
-    const product = this.products.value?.find((product) => product.id === productId);
+    const product = this.products.value.find((product) => product.id === productId);
 
     if (!product) {
       throw new Error('Product not found.');
@@ -50,7 +50,7 @@ export class ProductsService {
     }
 
     product.availableAmount -= amount;
-    product.amountInCart += amount;
+    product.amountInCart = product.amountInCart ? (product.amountInCart + amount) : amount;
 
     this.products.next(this.products.value);
   }

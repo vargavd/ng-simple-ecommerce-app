@@ -3,6 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { By } from '@angular/platform-browser';
+import { BehaviorSubject } from 'rxjs';
 
 // COMPONENT IMPORTS
 import { AppComponent } from './app.component';
@@ -10,20 +11,26 @@ import { AppComponent } from './app.component';
 // SERVICE IMPORTS
 import { ProductsService } from './services/products.service';
 
+// MODEL IMPORTS
+import { Product } from './models/product';
+
 
 describe('AppComponent', () => {
-  let productsServiceSpy: jasmine.SpyObj<ProductsService>;
 
   beforeEach(async () => {
-    productsServiceSpy = jasmine.createSpyObj('ProductsService', ['downloadProducts']);
-
     await TestBed.configureTestingModule({
       imports: [
         AppComponent,
       ],
       providers: [
         provideRouter(routes),
-        { provide: ProductsService, useValue: productsServiceSpy }
+        {
+          provide: ProductsService,
+          useValue: {
+            products: new BehaviorSubject<Product[] | null>(null),
+            errors: new BehaviorSubject<string[] | null>(null)
+          }
+        }
       ],
     }).compileComponents();
   });
