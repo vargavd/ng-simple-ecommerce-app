@@ -25,6 +25,7 @@ export class ProductsService {
         next: (products) => {
           this.products.next(products.map((product) => {
             product.amountInCart = 0;
+            product.id = `${product.id} ${product.name}`;
 
             return product;
           }));

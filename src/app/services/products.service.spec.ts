@@ -13,6 +13,8 @@ describe('ProductsService', () => {
     new Product('2', 'Product 2', '', 5, 2, 0)
   ];
 
+  let processedProducts: Product[];
+
   const httpMock = {
     get: (url: string) => of(mockProducts)
   };
@@ -27,6 +29,8 @@ describe('ProductsService', () => {
     });
 
     productsService = TestBed.inject(ProductsService);
+
+    processedProducts = productsService.products.value!;
   });
 
   it('should be created', () => {
@@ -52,28 +56,28 @@ describe('ProductsService', () => {
   it('should not add a product to the cart if products value is null', () => {
     productsService.products.next(null);
 
-    productsService.addToCart('1', 1);
+    productsService.addToCart(processedProducts[0].id, 1);
 
     expect(productsService.products.value).toBeNull();
   });
 
   it('should throw an error if the product to be added is not in the products array', () => {
-    expect(() => productsService.addToCart('3', 1)).toThrowError('Product not found.');
+    expect(() => productsService.addToCart('4213', 1)).toThrowError('Product not found.');
   });
 
   it('should throw an error if adding too many products to the cart', () => {
-    expect(() => productsService.addToCart('1', 11)).toThrowError('You are trying to add too much product.');
+    expect(() => productsService.addToCart(processedProducts[0].id, 11)).toThrowError('You are trying to add too much product.');
   });
 
   it('should throw an error if adding fewer products than the minimum order amount', () => {
-    expect(() => productsService.addToCart('2', 1)).toThrowError('Amount is less than minimum order amount.');
+    expect(() => productsService.addToCart(processedProducts[1].id, 1)).toThrowError('Amount is less than minimum order amount.');
   });
 
   it('should correctly add a product to the cart', () => {
-    productsService.addToCart('1', 1);
+    productsService.addToCart(processedProducts[0].id, 1);
 
-    expect(productsService.products.value?.find((product) => product.id === '1')?.amountInCart).toEqual(1);
-    expect(productsService.products.value?.find((product) => product.id === '1')?.availableAmount).toEqual(9);
+    expect(productsService.products.value?.find((product) => product.id === processedProducts[0].id)?.amountInCart).toEqual(1);
+    expect(productsService.products.value?.find((product) => product.id === processedProducts[0].id)?.availableAmount).toEqual(9);
   });
 
   it('should remove a product from the cart and update the available amount', () => {
