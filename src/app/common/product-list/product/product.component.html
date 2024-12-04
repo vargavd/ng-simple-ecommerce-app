@@ -13,12 +13,12 @@
     </div>
 
     <div class="content-info pt-1">
-      <div class="flex align-items-center justify-content-between py-2">
+      <div class="flex justify-content-between py-2 flex-column align-items-start xl:flex-row xl:align-items-center">
         <h2 class="text-lg m-0 text-primary">
           {{ product.name }}
         </h2>
 
-        <div class="flex align-items-center gap-1 justify-content-center pl-2">
+        <div class="flex align-items-center gap-1 justify-content-center pl-2 mt-2 xl:mt-0">
           @if (isThereEnoughAmount) {
             <i class="pi pi-check-circle text-green-600"></i>
             <span class="text-xs text-white white-space-nowrap in-stock">({{ product.availableAmount }}) In Stock</span>
@@ -51,8 +51,8 @@
         </span>
       </div>
       
-      <div class="flex align-items-center justify-content-between mt-2">
-        <div class="flex align-items-center">
+      <div class="flex align-items-center justify-content-between mt-2 flex-column gap-1 xl:flex-row xl:align-items-center xl:gap-0">
+        <div class="flex align-items-center justify-content-around">
           <p-button 
             [link]="true"
             icon="pi pi-minus"

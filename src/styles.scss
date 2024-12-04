@@ -1,4 +1,14 @@
+body {
+  margin: 8px 0;
+}
+
 .container {
   max-width: 1250px;
   margin: 0 auto;
+  
+  @media (max-width: 1312px) {
+    max-width: 100%;
+    padding-left: 25px;
+    padding-right: 25px;
+  }
 }
