@@ -63,14 +63,16 @@ describe('CartComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should display "No Products in Cart" and $0 as total when products is null', () => {
+  it('should display "No Products in Cart", 0 as total amount and $0 as total when products is null', () => {
     productsServiceMock.products.next(null);
     fixture.detectChanges();
 
     const noProducts = fixture.debugElement.nativeElement.querySelector('.p-message-detail');
+    const totalAmount = fixture.debugElement.nativeElement.querySelector('.total-amount');
     const total = fixture.debugElement.nativeElement.querySelector('.total');
 
     expect(noProducts.textContent.trim()).toBe('No Products in Cart');
+    expect(totalAmount.textContent.trim()).toBe('0');
     expect(total.textContent.trim()).toBe('$0');
   });
 
@@ -165,6 +167,9 @@ describe('CartComponent', () => {
 
     const total = fixture.debugElement.nativeElement.querySelector('.total');
     expect(total.textContent.trim()).toBe('$157.5');
+
+    const totalAmount = fixture.debugElement.nativeElement.querySelector('.total-amount');
+    expect(totalAmount.textContent.trim()).toBe('15');
   });
 
   it('should display multiple types of products in cart', () => {
@@ -203,6 +208,9 @@ describe('CartComponent', () => {
 
     const total = fixture.debugElement.nativeElement.querySelector('.total');
     expect(total.textContent.trim()).toBe('$238');
+
+    const totalAmount = fixture.debugElement.nativeElement.querySelector('.total-amount');
+    expect(totalAmount.textContent.trim()).toBe('29');
   });
 
   it('should call removeFromCart with the correct product id in a service when remove button is clicked', () => {

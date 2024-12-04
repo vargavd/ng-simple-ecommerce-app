@@ -53,6 +53,10 @@ export class CartComponent implements OnInit {
     return this.roundTo2Decimals(this.productsInCart?.reduce((acc, product) => acc + product.price * product.amountInCart!, 0) ?? 0);
   }
 
+  getTotalAmountInCart(): number {
+    return this.productsInCart?.reduce((acc, product) => acc + product.amountInCart!, 0) ?? 0;
+  }
+
   removeProductFromCart(productId: string): void {
     this.productsService.removeFromCart(productId);
   }

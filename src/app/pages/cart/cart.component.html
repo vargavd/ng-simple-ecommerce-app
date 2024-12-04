@@ -1,8 +1,15 @@
-<div class="total text-4xl font-semibold text-900 relative" style="bottom: -26px; float: right;">
-  {{ '$' + getFullPriceInCart() }}
-</div>
+<div class="mt-4 mb-2 flex flex-column gap-2 sm:flex-row sm:justify-content-between sm:align-items-center">
+  <h1 class="m-0">Cart</h1>
 
-<h1>Cart</h1>
+  <div class="text-900 flex gap-5 align-items-center">
+    <div class="flex text-lg sm:text-xl align-items-center gap-2">
+      <span>Amount:</span>
+      <span class="total-amount font-bold">{{ getTotalAmountInCart() }}</span>
+    </div>
+    |
+    <div class="total text-2xl sm:text-4xl font-semibold">{{ '$' + getFullPriceInCart() }}</div>
+  </div>
+</div>
 
 @if (productsInCart && productsInCart.length > 0) {
   <p-dataView #dv [value]="productsInCart">
