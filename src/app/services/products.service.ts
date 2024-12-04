@@ -1,10 +1,11 @@
 // NG IMPORTS
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, take } from 'rxjs';
+import { BehaviorSubject, map, take } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 // MODEL IMPORTS
 import { Product } from '../models/product';
+import { SampleProducts } from '../models/product-sample-data';
 
 // CONFIG
 import { environment } from '../env';
@@ -21,6 +22,9 @@ export class ProductsService {
   constructor(private http: HttpClient) {
     this.http.get<Product[]>(environment.apiUrl)
       .pipe(take(1))
+      .pipe(map((products) => {
+        return (products && products.length) ? products : SampleProducts;
+      }))
       .subscribe({
         next: (products) => {
           this.products.next(products.map((product) => {
@@ -33,6 +37,8 @@ export class ProductsService {
         error: (error) => {
           console.error(error);
           this.errors.next(['Failed to download products:', error.message]);
+
+          this.products.next(SampleProducts);
         }
       });
   }
