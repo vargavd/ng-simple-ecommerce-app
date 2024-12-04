@@ -1,27 +1,35 @@
-# NgSimpleEcommerceApp
+# Simple Ąngular v17 Ecommerce Webapp with Unit Tests
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.0.
+> [!CAUTION]
+> The products endpoint url has to be set in the `env.ts` file (format is below)
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- There are 2 pages: Products (homepage) and Cart
+- Every other url redirects to Products
+- Displays products from an external resource
+- Ability to add each products in various amounts
+- Handles stock amount and minimum order value
+- Cart page displays products added to the cart, plus total amount and total price
+- Manages ID duplication
+- Responsive UI
 
-## Code scaffolding
+## Implementation
+- **State management:** `Service` and `BehaviorSubject`
+- **UI and Responsivity:** 
+  - `PrimeNG` (Component Library)
+  - `PrimeIcons` (Icon Library) 
+  - `PrimeFlex` (CSS Utility Library)
+- **Additional Styles:** `SCSS` with `ViewEncapsulation.Emulated`
+- **Tests:** unit tests with `Jasmine` and `Karma`
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## `env.ts` format
+```
+export const environment = {
+  production: false,
+  apiUrl: 'https://url-to-products.com'
+};
 
-## Build
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+> <small>:bulb: This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.0.</small>
