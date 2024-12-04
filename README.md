@@ -1,7 +1,7 @@
 # Simple Ąngular v17 Ecommerce Webapp with Unit Tests
 
 > [!CAUTION]
-> The products endpoint url has to be set in the `env.ts` file (format is below)
+> The products endpoint url has to be set in the `src/app/env.ts` file (format is below)
 
 ## Features
 
@@ -23,7 +23,7 @@
 - **Additional Styles:** `SCSS` with `ViewEncapsulation.Emulated`
 - **Tests:** unit tests with `Jasmine` and `Karma`
 
-## `env.ts` format
+## `src/app/env.ts` format
 ```
 export const environment = {
   production: false,
